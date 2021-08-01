@@ -1,0 +1,138 @@
+Getting input from html file and printing in console
+------------------------------------------------------
+
+
+Steps
+------
+1) Install 3rd party module body-parser
+> npm install body-parser
+
+app.js
+--------------
+
+var express = require('express'); 
+const ejs = require('ejs');
+var app = express(); 
+const bodyParser= require('body-parser')
+
+app.use(bodyParser.urlencoded({extended:false}))
+app.set('view engine', 'ejs');
+
+
+app.post('/message',(req,res)=>{
+	var myObj = req.body;
+	console.log(myObj)
+})
+app.get('/about',(req,res)=>{
+	res.render('about.ejs')
+});
+app.listen(4000)
+
+about.ejs
+----------
+
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>About us Page</title> 
+      
+    <style type="text/css" media="screen"> 
+        body { 
+            background-color: lightgreen; 
+            text-decoration-color: white; 
+            
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    <center>This is our about us page.</center> 
+    <form method = "POST" action = "/message">
+    <label>Username : </label>
+    <input type = "text" name="username">
+    <br>
+    <label>Password : </label>
+    <input type = "password" name = "password">
+    <button type="submit">Submit</button>
+    
+    </form>
+</body> 
+  
+</html>  
+
+
+Getting input from html file and passing to  another file
+--------------------------------------------------------------
+
+app.js
+--------
+
+var express = require('express'); 
+const ejs = require('ejs');
+var app = express(); 
+const bodyParser= require('body-parser')
+  
+
+
+app.use(bodyParser.urlencoded({extended:false}))
+app.set('view engine', 'ejs');
+
+
+app.post('/message',(req,res)=>{
+	var myObj = req.body;
+	console.log(myObj)
+	res.render('home.ejs',{mydata:myObj})
+})
+app.get('/about',(req,res)=>{
+	res.render('about.ejs')
+});
+app.listen(4000)
+
+
+about.ejs
+-------------
+
+Same as above
+
+home.ejs
+------------
+
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>Home Page</title> 
+      
+    <style type="text/css" media="screen"> 
+        body { 
+            background-color: skyblue; 
+            text-decoration-color: white; 
+            
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    
+
+    <h2>Your username is <%= mydata.username %></h2>
+    <h2>Your username is <%= mydata.password %></h2>
+</body> 
+  
+</html>  
+
+
+Description for body-parser
+-----------------------------
+
+bodyParser.urlencoded({ extended: true }) - middleware for parsing bodies from URL.
+
+Returns middleware that only parses {urlencoded} bodies and only looks at requests where the Content-Type header matches the type option. This parser accepts only UTF-8 encoding of the body and supports automatic inflation of gzip and deflate encodings.
+
+A new body object containing the parsed data is populated on the request object after the middleware (i.e. req.body). This object will contain key-value pairs, where the value can be a string or array (when extended is false), or any type (when extended is true).
+
+
+

@@ -1,0 +1,237 @@
+Database connection
+----------------------
+
+Steps
+-----
+1)Install xampp in your system
+2)Run xampp
+3)In browser, take localhost
+    phpmyadmin ---> Create a database,table,enter 2 values
+
+4)Install mysql2 in your project folder
+> npm install mysql2
+
+
+
+Check whether connection established or not
+-------------------------------------------
+
+
+database.js
+--------------
+
+const mysql = require('mysql2')
+let connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'db_haripriya'
+});
+
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('Connected to the MySQL server.');
+});
+
+
+NB:
+-------
+    host: '192.168.1.250',
+    user: 'scopeinternship',
+    password: 'scopeinternship',
+    database: 'scopeinternship'
+
+USE mysql instead of mysql2
+
+Create database
+-------------------
+
+
+app.js
+-------
+
+const mysql = require('mysql2')
+let connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+});
+
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('Connected to the MySQL server.');
+   connection.query('Create database new_database',function(err,result){
+        if(err) throw err;
+        else
+        return console.log('Database created successfully...');
+  
+});
+});
+
+
+Creating table
+--------------------
+
+const mysql = require('mysql2')
+let connection = mysql.createConnection({
+   host: 'localhost',
+   user: 'root',
+   password: '',
+   database: 'new_database'
+});
+
+connection.connect(function(err) {
+ if (err) {
+   return console.error('error: ' + err.message);
+ }
+
+ console.log('Connected to the MySQL server.');
+  connection.query('CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))',function(err,result){
+       if(err) throw err;
+       else
+       return console.log('Table created successfully...');
+ 
+});
+});
+
+
+Inserting values
+-----------------
+
+const mysql = require('mysql2')
+let connection = mysql.createConnection({
+   host: 'localhost',
+   user: 'root',
+   password: '',
+   database: 'new_database'
+
+});
+
+connection.connect(function(err) {
+ if (err) {
+   return console.error('error: ' + err.message);
+ }
+
+ console.log('Connected to the MySQL server.');
+  connection.query("INSERT INTO customers (name, address) VALUES ('Arun', 'TVM')",function(err,result){
+       if(err) throw err;
+       else
+       return console.log('Value inserted successfully...');
+ 
+});
+});
+
+
+Fetching values from database
+------------------------------
+
+database.js
+-------------
+
+const mysql = require('mysql2')
+const pool = mysql.createPool({
+						host:'localhost',
+						user:'root',
+						database:'new_database',
+						password:''
+
+})
+module.exports = pool.promise()
+
+app2.js
+-----------
+
+const db = require('./database.js')
+
+db.execute('Select * From customers')
+
+		.then(result =>{
+			console.log(result)
+		})
+		.catch(err =>{
+			console.log(err)
+		})
+
+
+Printing values in ejs file
+-------------------------------
+
+app.js
+-------
+
+var express = require('express'); 
+const ejs = require('ejs');
+var app = express(); 
+const db=require('./database.js')
+  
+// Set EJS as templating engine 
+app.set('view engine', 'ejs');
+
+app.get('/message', (req, res)=>{ 
+
+	db.execute('Select * From customers')
+
+		.then(([row,fieldData]) =>{
+			console.log(row)
+			res.render('home',{myrow:row});
+		})
+		.catch(err =>{
+			console.log(err)
+		})
+  
+ 
+  
+}); 
+app.listen(3000)
+
+
+home.ejs
+---------
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>Home Page</title> 
+      
+    <style type="text/css" media="screen"> 
+        body { 
+            background-color: skyblue; 
+            text-decoration-color: white; 
+            
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    
+<p>Hello</p>
+
+<% if (myrow.length>0) { %>
+<% for (let myrow1 of myrow) { %>
+<h1><%= myrow1.name %> </h1>
+<h2><%= myrow1.address %></h2>
+<% } %>
+<% } %>
+</body> 
+  
+</html>  
+
+database.ejs
+---------------
+
+const mysql = require('mysql2')
+ const pool = mysql.createPool({
+ 						host:'localhost',
+ 						user:'root',
+ 						database:'new_database',
+ 						password:''
+
+ })
+ module.exports = pool.promise()

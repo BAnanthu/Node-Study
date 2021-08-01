@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+      .error{
+        margin-left: 20px;
+        color: red;
+        font-size: 10px;
+      }
+    </style>
+</head>
+<body>
+    
+<div class="card">
+    <h1><%= text %></h1>
+    <span class="error"><%= err %></span>
+    <form action="/users" method="post" novalidate>
+      <Label>username :   <input type="text" name="username"></Label>
+      <Label>email :   <input type="email" name="email"></Label>
+      <Label>password :   <input type="password" name="password"></Label>
+      <Label>confirm password :   <input type="password" name="confirm_password"></Label>
+      <Button type="submit">submit</Button>
+    </form>
+</div>
+
+</body>
+</html>

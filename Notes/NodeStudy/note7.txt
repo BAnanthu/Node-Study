@@ -1,0 +1,178 @@
+Use EJS as Template Engine in Node.js
+
+--------------------------------------
+
+Now, the first thing we need to do is to set EJS as our templating engine with Express which is a Node.js web application server framework, which is specifically designed for building single-page, multi-page, and hybrid web applications. It has become the standard server framework for node.js.
+
+The default behavior of EJS is that it looks into the ‘views’ folder for the templates to render. So, let’s make a ‘views’ folder in our main node project folder and make a file named “home.ejs” which is to be served on some desired request in our node project.
+
+app.js
+---------
+
+var express = require('express'); 
+const ejs = require('ejs');
+var app = express(); 
+  
+// Set EJS as templating engine 
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res)=>{ 
+  
+res.render('home'); 
+  
+}); 
+app.listen(4000)
+
+views/home.ejs
+--------------
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>Home Page</title> 
+      
+    <style type="text/css" media="screen"> 
+        body { 
+            background-color: skyblue; 
+            text-decoration-color: white; 
+            
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    <center>This is our home page.</center> 
+
+</body> 
+  
+</html>  
+
+
+Now, the page home.ejs will be displayed on requesting localhost. 
+
+
+Passing dynamic values while rendering page
+--------------------------------------------
+
+To add dynamic content this render method takes a second parameter which is an object. This is done as:
+
+app.js
+--------
+
+var express = require('express'); 
+const ejs = require('ejs');
+var app = express(); 
+  
+
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res)=>{ 
+  
+res.render('home',{name:'Priya',age:25,place:'Trivandrum'}); 
+  
+}); 
+app.listen(4000)
+
+home.ejs
+---------
+
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>Home Page</title> 
+      
+    <style type="text/css" media="screen"> 
+        body { 
+            background-color: skyblue; 
+            text-decoration-color: white; 
+            
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    <center>This is our home page.</center> 
+    <p>
+    	<h1>Welcome <%= name %></h1>
+    	<h2>Your age is <%= age %> </h2>
+    	<h3>Your place is <%= place %>
+    	
+    </p>
+</body> 
+  
+</html>  
+
+
+Same url and different content on submit click
+-----------------------------------------------
+app.js
+---------
+
+var express = require('express'); 
+const ejs = require('ejs');
+var app = express(); 
+  
+// Set EJS as templating engine 
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res)=>{ 
+  
+
+res.render('home',{name:'Priya',age:25,place:'Trivandrum'}); 
+  
+}); 
+app.get('/about',(req,res)=>{
+	res.render('about.ejs')
+});
+app.post('/about',(req,res)=>{
+	res.send("You have submitted the form ")
+})
+app.listen(4000)
+
+NB
+---
+
+
+Create new file about.ejs in views folder
+views/about.ejs
+----------------
+
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>About us Page</title> 
+      
+    <style type="text/css" media="screen"> 
+        body { 
+            background-color: lightgreen; 
+            text-decoration-color: white; 
+            
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    <center>This is our about us page.</center> 
+    <form method = "POST">
+    <label>Username : </label>
+    <input type = "text">
+    <br>
+    <label>Password : </label>
+    <input type = "password">
+    <button type="submit">Submit</button>
+    
+    </form>
+</body> 
+  
+</html>  
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+Nodemon
+----------------
+
+Nodemon is a utility that will monitor for any changes in your source and automatically restart your server. Perfect for development. Install it using npm. Just use nodemon instead of node to run your code, and now your process will automatically restart when your code changes.
+
+
+Installation
+----------------------
+npm install -g nodemon
+
+Usage
+----------------------
+nodemon wraps your application, so you can pass all the arguments you would normally pass to your app:
+
+nodemon [your node app]
+
+
+
+Asynchronous Property of Nodejs
+----------------------------------
+
+async.js
+---------
+
+console.log('Starting app')
+setTimeout(()=>{
+	console.log('Inside call back')
+
+},200)
+console.log('Finishing app')
+
+
+Create server using nodejs
+-------------------------------
+
+const http = require('http')
+const server = http.createServer((req,res)=>{
+	const url = req.url
+	
+	if(url == '/') {
+		res.write('<h1>Hello</h1>')
+
+	}
+
+
+})
+
+server.listen(3000)
+
+
+Todo
+------
+1)Execute your program
+2)In browser,goto localhost:3000/
+3)Include more urls
+
+Implementing form in nodejs
+----------------------------
+const http = require('http')
+const server = http.createServer((req,res)=>{
+	const url = req.url
+	
+	if(url == '/') {
+		res.write('<html>');
+		res.write('<form action="/" method ="POST">' );
+		res.write('<label>Username</label>');
+		res.write('<input type="text" name="username"><br>');
+		res.write('<label>Password</label>');
+		res.write('<input type="password" name="password"><br>');
+		res.write('<button type="submit">Create new</button>');
+		res.write('<button type="button">Login</button>');
+        res.end();
+	}
+
+
+})
+
+server.listen(3000)
+
+
+Getting value of textbox in nodejs
+-----------------------------------
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+Arrow Function
+-------------------
+Arrow functions were introduced in ES6.
+
+Arrow functions allow us to write shorter function syntax:
+
+Before:
+--------
+hello = function() {
+  return "Hello World!";
+}
+
+With Arrow Function:
+--------------------
+hello = () => {
+  return "Hello World!";
+}
+
+
+
+3)3rd party modules - npm
+----------------------
+
+To check whether npm is installed or not
+----------------------------------------
+> npm -v
+
+i) > npm init
+
+This will create new file package.json
+
+package.json
+--------------
+All npm packages contain a file, usually in the project root, called package. json - this file holds various metadata relevant to the project. This file is used to give information to npm that allows it to identify the project as well as handle the project's dependencies.
+
+
+ii) > npm install lodash
+
+const lodash1 = require('lodash')
+console.log(lodash1.isString(45))
+
+var filteredarray = lodash1.uniq([1,2,3,1,4,5,2,3,'a','b'])
+console.log(filteredarray)
+

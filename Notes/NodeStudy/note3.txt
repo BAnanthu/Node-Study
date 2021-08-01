@@ -1,0 +1,58 @@
+Require os
+----------------
+
+const os = require('os')
+var user = os.userInfo()
+console.log(user)
+
+output
+------------
+{
+  uid: 1000,
+  gid: 1000,
+  username: 'haripriya',
+  homedir: '/home/haripriya',
+  shell: '/bin/bash'
+}
+Here uid refers to user identifier
+gid refers to group identifier
+
+
+2) User defined modules
+---------------------------
+
+
+You can create your own modules, and easily include them in your applications.
+
+notes.js
+--------------
+module.exports.name = 'XYZ'
+
+app.js
+--------------
+const notes = require('./notes.js')
+console.log(notes.name)
+
+NB:-
+Use the exports keyword to make properties and methods available outside the module file.
+
+- Including a function in new file
+-----------------------------------
+
+notes.js
+-----------
+
+module.exports.name = 'XYZ'
+module.exports.addNotes = function(){
+console.log('Add Notes...')
+return "New Note"
+}
+
+
+app.js
+---------
+const notes = require('./notes.js')
+var res = notes.addNotes()
+console.log(res)
+
+

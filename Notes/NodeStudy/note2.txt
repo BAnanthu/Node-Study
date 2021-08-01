@@ -1,0 +1,26 @@
+node modules
+--------------------
+
+
+Node modules are of three types
+1. Inbuilt modules (Core modules)
+2. User defined modules (Local modules)
+3. 3rd party modules
+
+
+Instead of a function call, we will be using the term 'require'
+
+
+1) Inbuilt modules
+--------------------
+Node.js has a set of built-in modules which you can use without any further installation.
+Inorder to use core modules or npm modules, first we need to import it using require function.
+ 
+var module = require('modulename')
+eg:- var fs = require('fs')
+
+eg: fs, url,http,querystring,path etc
+
+fs module provide an API for interacting with file system
+
+
