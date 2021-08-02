@@ -1,5 +1,5 @@
 const { response } = require('express');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator'); 
 
 
 const SignupMiddleware = [

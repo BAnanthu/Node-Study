@@ -7,7 +7,7 @@ var fs = require('fs');
     });
 
 
-// file is opened for writing
+// // file is opened for writing
     fs.open('mynewfile2.txt', 'w', function (err, file) {
         if (err) throw err;
         console.log('Saved!');
@@ -17,21 +17,21 @@ var fs = require('fs');
 
 //   replaces the specified file and content if it exists
 
-    fs.writeFile('mynewfile1.txt', 'Hello content!', function (err) {
+    fs.writeFile('mynewfile1.txt', 'Hello content 2!', function (err) {
         if (err) throw err;
         console.log('Saved!');
     });
 
 
 
-// delete a file
+// // delete a file
     fs.unlink('mynewfile2.txt', function (err) {
         if (err) throw err;
         console.log('File deleted!');
     });
 
-// Rename
-    fs.rename('mynewfile1.txt', 'myrenamedfile.txt', function (err) {
+// // Rename
+    fs.rename('mynewfile1.txt', 'myfile.txt', function (err) {
         if (err) throw err;
         console.log('File Renamed!');
     });

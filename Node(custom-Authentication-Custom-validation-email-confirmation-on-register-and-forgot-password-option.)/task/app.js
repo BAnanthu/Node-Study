@@ -2,7 +2,7 @@ const express =  require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 5000
-const db = require('./queries')
+// const db = require('./queries')
 const router = express.Router()
 const middleware = require('./middlewares')
 
@@ -45,7 +45,7 @@ app.get('/user/:token',(req,res)=>{
   console.log(req.params.token)
 })
 
-app.get('/users/:id', db.getUserById)
+// app.get('/users/:id', db.getUserById)
 app.get('/about', (req, res) => {
    res.sendFile(__dirname + '/views/about.html')
 })
