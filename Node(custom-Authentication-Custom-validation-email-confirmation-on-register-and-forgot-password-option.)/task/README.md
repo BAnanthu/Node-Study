@@ -15,3 +15,9 @@ CREATE TABLE users (
 https://nodemailer.com/about/
 
 https://bbbootstrap.com/snippets/confirm-account-email-template-17848137#
+
+https://github.com/iamshaunjp/node-express-jwt-auth/blob/lesson-15/
+
+
+https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/
+npm install express express-session cookie-parser

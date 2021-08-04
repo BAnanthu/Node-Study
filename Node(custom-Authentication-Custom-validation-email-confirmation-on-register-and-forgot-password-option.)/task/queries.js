@@ -66,7 +66,36 @@ const createUser = (request, response) =>  {
     })
   }
 
+  const loginAuth = (request, response) => {
+    console.log("request")
+    console.log(request)
+    const username = request.body.username
+    const password = request.body.password
+
+    pool.query('SELECT * FROM users WHERE username = $1', [username], (error, results) => {
+      if (error) {
+        throw error
+      }
+      // console.log( results.rows[0].password, results.rows[0].id, results.rows[0].username)
+     if( bcrypt.compareSync(password, results.rows[0].password) == true){
+      session=request.session;
+      session.userid=request.body.username;
+      console.log(request.session)
+      response.redirect('/home');
+     }
+      // console.log(bcrypt.compareSync(password, results.rows[0].password))
+      // response.status(200).json(results.rows)
+    })
+    // console.log("***",username)
+    // pool.query('SELECT * FROM users WHERE username = $1 AND password = $2', [username,"Ananthu@123"], (error, results) => {
+    //   if (error) {
+    //     throw error
+    //   }
+    //   response.status(200).json(results.rows)
+    // })
+  }
+
   
   module.exports = {
-    createUser,getUserById,authUser
+    createUser,getUserById,authUser,loginAuth
   }
