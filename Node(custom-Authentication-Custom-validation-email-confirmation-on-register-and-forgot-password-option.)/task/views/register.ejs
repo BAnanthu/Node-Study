@@ -17,7 +17,12 @@
     
 <div class="card">
     <h1><%= text %></h1>
+    
 
+
+<% if (typeof err !== 'undefined' && err.length > 0) { %>
+  <p class="error"><%= err %></p>
+  <% } %>
     <form action="/users" method="post" novalidate>
       <Label>username :   <input type="text" name="username"></Label>
       <Label>email :   <input type="email" name="email"></Label>

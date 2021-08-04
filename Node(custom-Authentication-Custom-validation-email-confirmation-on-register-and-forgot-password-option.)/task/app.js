@@ -2,7 +2,7 @@ const express =  require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 5000
-// const db = require('./queries')
+const db = require('./queries')
 const router = express.Router()
 const middleware = require('./middlewares')
 
@@ -10,6 +10,8 @@ const { check, validationResult } = require('express-validator');
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());  
+const sentMail = require('./mail')
+
 
 // Static Files
 app.use(express.static('public'));
@@ -27,25 +29,31 @@ router.post('/users',middleware.SignupMiddleware,
 (req, res) => {
   const result = validationResult(req);
   const hasErrors = !result.isEmpty();
-
-  if(req.body.password == req.body.confirm_password){
+console.log(result)
+  // if(req.body.password == req.body.confirm_password){
     if(hasErrors) {
       res.render('register.ejs', { text: 'Register here',err:result.errors[0].msg })
     }else{
       db.createUser(req, res)
     }
-  } else{
-    res.render('register.ejs', { text: 'Register here',err:'password doesn\'t match' })
-  }
+  // } else{
+  //   res.render('register.ejs', { text: 'Register here',err:'password doesn\'t match' })
+  // }
 }
 );
 
 
-app.get('/user/:token',(req,res)=>{
-  console.log(req.params.token)
+
+app.get('/forgot',(req,res)=>{
+  sentMail("ananthu3454@gmail.com","ananthu","nil");
+  console.log(req)
+  res.render('register.ejs', { text: 'Register here',err:'password doesn\'t match' })
 })
 
-// app.get('/users/:id', db.getUserById)
+
+app.get('/user/:id/:token',db.authUser)
+
+app.get('/users/:id', db.getUserById)
 app.get('/about', (req, res) => {
    res.sendFile(__dirname + '/views/about.html')
 })

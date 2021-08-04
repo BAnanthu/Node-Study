@@ -6,7 +6,7 @@ var MailSetup;
 
 
 // async..await is not allowed in global scope, must use a wrapper
-const sentAMail =async (email,username,token) => { 
+const sentAMail =async (email,username,token,id) => { 
   // const { username, email } = request
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
@@ -23,7 +23,7 @@ const sentAMail =async (email,username,token) => {
         pass: '73566230882', // generated ethereal password
       },
     });
-    ejs.renderFile(__dirname + '/template/mail.ejs', { name: username, token:token }, function (err, data) {
+    ejs.renderFile(__dirname + '/template/mail.ejs', { name: username, token:token, id:id }, function (err, data) {
          MailSetup = {
           from: '"ananthu3454@gmail.com" <ananthu3454@gmail.com>', // sender address
           to: `${email},  ${email}`, // list of receivers

@@ -20,7 +20,16 @@ const SignupMiddleware = [
                         .withMessage('Password Must Contain a Number')
                         .matches('[A-Z]')
                         .withMessage('Password Must Contain an Uppercase Letter')
-                        .trim().escape()
+                        .trim().escape(),
+
+                        check('confirm_password').custom((value, { req }) => {
+                            if (value !== req.body.password) {
+                              throw new Error('Password confirmation does not match password');
+                            }
+                        
+                            // Indicates the success of this synchronous custom validator
+                            return true;
+                          }),
                     ]
 
 
