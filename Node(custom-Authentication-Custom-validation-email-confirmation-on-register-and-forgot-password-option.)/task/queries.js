@@ -65,6 +65,12 @@ const createUser = (request, response) =>  {
       }
     })
   }
+  const maxAge = 3 * 24 * 60 * 60;
+  const createToken = (id) => {
+    return jwt.sign({ id }, 'secretkey', {
+      expiresIn: maxAge
+    });
+  };
 
   const loginAuth = (request, response) => {
     console.log("request")
@@ -78,9 +84,11 @@ const createUser = (request, response) =>  {
       }
       // console.log( results.rows[0].password, results.rows[0].id, results.rows[0].username)
      if( bcrypt.compareSync(password, results.rows[0].password) == true){
-      session=request.session;
-      session.userid=request.body.username;
-      console.log(request.session)
+      // session=request.session;
+      const token = createToken(results.rows[0].id);
+      response.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 }); //The res. cookie() function is used to set the cookie name to value. The value parameter may be a string or object converted to JSON. Parameters: The name parameter holds the name of the cookie and the value parameter is the value assigned to the cookie name.
+      // session.userid=request.body.username;
+      // console.log(request.session)
       response.redirect('/home');
      }
       // console.log(bcrypt.compareSync(password, results.rows[0].password))

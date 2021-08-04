@@ -1,6 +1,7 @@
 const { response } = require('express');
 const { check, validationResult } = require('express-validator'); 
 
+const jwt = require('jsonwebtoken')
 
 const SignupMiddleware = [
                         check('username')
@@ -34,31 +35,40 @@ const SignupMiddleware = [
 
 
   const requireAuth = (req, res, next) => {
-    // const token = req.cookies.jwt;
+    const token = req.cookies.jwt;
     
     console.log("Middleware work")
-    if(req.session.userid){
-      next();
-    }
-    else{
-      res.redirect('/')
-    }
-   
+
     // check json web token exists & is verified
-    // if (token) {
-    //   jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
-    //     if (err) {
-    //       console.log(err.message);
-    //       res.redirect('/login');
-    //     } else {
-    //       console.log(decodedToken);
-    //       next();
-    //     }
-    //   });
-    // } else {
-    //   res.redirect('/login');
-    // }
+    if (token) {
+      jwt.verify(token, 'secretkey', (err, decodedToken) => {
+        if (err) {
+          console.log(err.message);
+          res.redirect('/login');
+        } else {
+          console.log(decodedToken);
+          next();
+        }
+      });
+    } else {
+      res.redirect('/login');
+    }
   };
+
+
+
+  
+  // const requireAuth = (req, res, next) => {
+    
+  //   console.log("Middleware work")
+  //   if(req.session.userid){
+  //     next();
+  //   }
+  //   else{
+  //     res.redirect('/')
+  //   }
+
+  // };
 
 module.exports = {
     SignupMiddleware,requireAuth
