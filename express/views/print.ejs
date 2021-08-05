@@ -1,0 +1,24 @@
+<html>
+<body>
+    <table id="table" style="border: 1px solid green;" >  
+        <thead>  
+            <tr>  
+                <th style="border: 1px solid green;">Customer_ID</th>  
+                <th style="border: 1px solid green;">Customer_Name</th>  
+                <th style="border: 1px solid green;">Customer_Place</th>  
+            </tr>  
+        </thead>  
+         <tbody>  
+         <% obj.forEach(function (customer) { %>
+            <tr style="border: 1px solid green;" >  
+                <td style="border: 1px solid green;" ><%= customer.customer_id %></td>  
+                <td style="border: 1px solid green;" ><%= customer.customer_name %></td>
+                <td style="border: 1px solid green;" ><%= customer.customer_place%></td>
+            </tr> 
+                                              
+         <% }) %>
+         </tbody>
+    </table>   
+</body>
+
+</html>
