@@ -19,8 +19,8 @@ const sentAMail =async (email,username,token,id) => {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: 'ananthu3454@gmail.com', // generated ethereal user
-        pass: '73566230882', // generated ethereal password
+        user: 'xxxxxxxxx@gmail.com', // generated ethereal user
+        pass: 'xxxxxxxxxxxxxx', // generated ethereal password
       },
     });
     ejs.renderFile(__dirname + '/template/mail.ejs', { name: username, token:token, id:id }, function (err, data) {
