@@ -65,6 +65,7 @@ axios.put('https://reqres.in/api/users/2', {
 
 const FormData = require('form-data');
 const fs = require('fs');
+const { config } = require('process');
 
 async function runn() {
     const formData = new FormData();
@@ -90,3 +91,60 @@ async function runn() {
 // 'User-Agent': 'axios/0.19.2',
 // 'X-Amzn-Trace-Id': 'Root=1-string of numbers and characters that are never the same-ditto'
 runn()
+
+
+// for Autherisation token passing etc
+
+
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
+
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  }, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  });
+
+
+// interceptor eg:sending json web token as authorisation header
+// this will be use by any axios requests
+const apiUrl = 'https://reqres.in/api'
+axios.interceptors.request.use(
+    config => {
+        config.headers.authorization =`Bearer ${accessToken}`
+    }
+)
+await axios.get(`${apiUrl}/users`);
+
+
+
+
+
+//   The Axios Instance
+  const instance = axios.create({
+    baseURL: 'https://some-domain.com/api/',
+    timeout: 1000,
+    headers: {'X-Custom-Header': 'foobar'}
+  });
+  
+//eg:
+// here not all axios request wiill use accessToken
+  const authAxios = axios.create({
+    baseURL:apiUrl,
+    timeout: 1000,
+    headers: {
+       Authorization: `Bearer ${accessToken}`}
+  });
+
+  await authAxios.get(`/users`);
