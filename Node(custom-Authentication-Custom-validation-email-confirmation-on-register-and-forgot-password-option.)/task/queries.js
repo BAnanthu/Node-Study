@@ -8,6 +8,7 @@ const pool = new Pool({
   password: 'scope',
   port: 5434,
 })
+
 const sentMail = require('./mail')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');

@@ -21,3 +21,6 @@ https://github.com/iamshaunjp/node-express-jwt-auth/blob/lesson-15/
 
 https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/
 npm install express express-session cookie-parser
+
+
+https://github.com/GainorB/node-express-mvc/blob/master/models/article.js

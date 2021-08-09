@@ -19,10 +19,11 @@ const sentAMail =async (email,username,token,id) => {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: 'xxxxxxxxx@gmail.com', // generated ethereal user
-        pass: 'xxxxxxxxxxxxxx', // generated ethereal password
+        user: 'ananthu3454@gmail.com', // generated ethereal user
+        pass: 'Ananthu@123', // generated ethereal password
       },
     });
+    
     ejs.renderFile(__dirname + '/template/mail.ejs', { name: username, token:token, id:id }, function (err, data) {
          MailSetup = {
           from: '"ananthu3454@gmail.com" <ananthu3454@gmail.com>', // sender address
@@ -31,7 +32,6 @@ const sentAMail =async (email,username,token,id) => {
           text: "Hello world?", // plain text body
           html: data, // html body
         };
-  
     });
   
     // send mail with defined transport object

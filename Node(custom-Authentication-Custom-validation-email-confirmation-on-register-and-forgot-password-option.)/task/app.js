@@ -59,6 +59,7 @@ router.post('/users', middleware.SignupMiddleware,
   }
 );
 
+
 app.get('/login',
   (req, res) => {
     res.render('login.ejs', { text: 'Login here' })
@@ -95,10 +96,16 @@ app.get('/forgot', (req, res) => {
 app.get('/user/:id/:token', db.authUser)
 
 app.get('/users/:id', db.getUserById)
+
 app.get('/about', (req, res) => {
   res.sendFile(__dirname + '/views/about.html')
 })
 app.use('/', router)
+
+
+app.post('/upload', function(req, res) {
+  console.log(req.files.foo); // the uploaded file object
+});
 // Listen on Port 5000
 app.listen(port, () => console.info(`App listening on port http://localhost:${port}`))
 
