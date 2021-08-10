@@ -37,6 +37,5 @@ input{
 
 .card{
     width: 370px;
-    height: 420px;
     box-shadow: 1px 1px 10px -3px rgb(0, 132, 255);
 }

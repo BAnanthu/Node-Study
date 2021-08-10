@@ -49,7 +49,7 @@ router.post('/users', middleware.SignupMiddleware,
     console.log(result)
     // if(req.body.password == req.body.confirm_password){
     if (hasErrors) {
-      res.render('register.ejs', { text: 'Register here', err: result.errors[0].msg })
+      res.render('register.ejs', { text: 'Register here', err: result.errors})
     } else {
       db.createUser(req, res)
     }

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 5001;
+const PORT = 5002;
 
 if (!PORT) {
     throw new Error("PORT variable not defined");

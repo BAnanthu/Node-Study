@@ -18,15 +18,39 @@
 <div class="card">
     <h1><%= text %></h1>
     
+  
 
-
-<% if (typeof err !== 'undefined' && err.length > 0) { %>
-  <p class="error"><%= err %></p>
-  <% } %>
     <form action="/users" method="post" novalidate>
       <Label>username :   <input type="text" name="username"></Label>
+      <% if (typeof err !== 'undefined' && err.length > 0) { %>
+
+        <% err.forEach(function (error) { %>
+          <% if ( error.param == 'username') { %>
+          <p class="error"><%= error.msg %></p>
+          <% } %>                                  
+          <% }) %>
+       
+        <% } %>
       <Label>email :   <input type="email" name="email"></Label>
+      <% if (typeof err !== 'undefined' && err.length > 0) { %>
+
+        <% err.forEach(function (error) { %>
+          <% if ( error.param == 'email') { %>
+          <p class="error"><%= error.msg %></p>
+          <% } %>                                  
+          <% }) %>
+       
+        <% } %>
       <Label>password :   <input type="password" name="password"></Label>
+      <% if (typeof err !== 'undefined' && err.length > 0) { %>
+
+        <% err.forEach(function (error) { %>
+          <% if ( error.param == 'password') { %>
+          <p class="error"><%= error.msg %></p>
+          <% } %>                                  
+          <% }) %>
+       
+        <% } %>
       <Label>confirm password :   <input type="password" name="confirm_password"></Label>
       <Button type="submit">submit</Button>
     </form>
