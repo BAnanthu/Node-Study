@@ -20,7 +20,7 @@ const sentAMail =async (email,username,token,id) => {
       secure: false, // true for 465, false for other ports
       auth: {
         user: 'ananthu3454@gmail.com', // generated ethereal user
-        pass: 'Ananthu@123', // generated ethereal password
+        pass: '*******', // generated ethereal password
       },
     });
     

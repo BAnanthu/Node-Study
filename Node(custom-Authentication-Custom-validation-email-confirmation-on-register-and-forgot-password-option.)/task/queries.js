@@ -24,7 +24,7 @@ const createUser = (request, response) =>  {
       }
      else{
       response.status(201).send(`User added with ID:${results.rows[0].id}`);
-      sentMail(results.rows[0].email,results.rows[0].username,results.rows[0].token,results.rows[0].id);
+      // sentMail(results.rows[0].email,results.rows[0].username,results.rows[0].token,results.rows[0].id);
      }
     })
   
